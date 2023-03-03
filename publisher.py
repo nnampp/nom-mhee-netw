@@ -13,9 +13,6 @@ pub = sys.argv[1]
 data = pd.DataFrame({'A' : []})
 topic = ''
 
-host = "broker.mqttdashboard.com"
-port = 1883
-
 if pub == '1':
     data = pd.read_excel("D:/work/2-2022/CPE314/project_mqtt/SampleInput.xlsx")
     topic = "MQTT/TOPIC1"
@@ -27,10 +24,9 @@ else:
     sys.exit()
 
 client = mqtt.Client(pub)
-# print("Subscriber IP address: " + client._host)
+
 client.connect("mqtt.eclipseprojects.io", 1883, 60)
 for x in data.values:
-    
     print(sys.getsizeof(str(x[0])+","+str(x[1])+","+str(x[2])))
     print(sys.getsizeof(str(x[3][0:163])))
     print(sys.getsizeof(str(x[3][163:])))

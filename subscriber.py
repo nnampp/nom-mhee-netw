@@ -4,29 +4,32 @@ from datetime import datetime
 import sys
 import socket
 
-hostname = socket.gethostname()
-IPAddr = socket.gethostbyname(hostname)
-print("IP address: "+IPAddr)
+# hostname = socket.gethostname()
+# IPAddr = socket.gethostbyname(hostname)
+# print("IP address: "+IPAddr)
 
 # ----------------------------------------------------------------------------------------------------------------
 # command line syntax:
 #  C:/Users/User/anaconda3/python.exe d:/work/2-2022/CPE314/project_mqtt/subscriber.py [topic1] [topic2]
 # ----------------------------------------------------------------------------------------------------------------
 
-topic1 = sys.argv[1]
-topic2 = sys.argv[2]
+topic = ''
+topic1 = ''
+topic2 = ''
 
-topic = [(topic1,0),(topic2,0)]
+if(len(sys.argv) == 3): 
+    topic = [(sys.argv[1],0),(sys.argv[2],0)]
+elif(len(sys.argv) == 2):
+    topic = sys.argv[1]
+else:
+    print("Please enter topic 1-2 topics.")
+    sys.exit()
 
 mydb = mysql.connector.connect(
         host="localhost",
         user="root",
         password="",
         database="mqtt_subscriber_1")
-
-
-host = "broker.mqttdashboard.com"
-port = 8000
 
 count = 0
 id = ''
