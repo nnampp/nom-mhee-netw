@@ -22,6 +22,9 @@ if pub == '1':
 elif pub == '2':
     data = pd.read_excel("D:/work/2-2022/CPE314/project_mqtt/SampleInput2.xlsx")
     topic = "MQTT/TOPIC2"
+else:
+    print("Publisher number is not available (available just 1 and 2). Please try again.")
+    sys.exit()
 
 client = mqtt.Client(pub)
 # print("Subscriber IP address: " + client._host)
@@ -33,7 +36,7 @@ for x in data.values:
     print(sys.getsizeof(str(x[3][163:])))
  
     client.publish(topic,"start")
-    client.publish(topic,int(pub))
+    client.publish(topic,str(pub).zfill(4))
     client.publish(topic,str(x[0])+","+str(x[1])+","+str(x[2]))
     client.publish(topic,str(x[3][0:165]))
     client.publish(topic,str(x[3][165:]))

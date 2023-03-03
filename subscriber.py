@@ -51,7 +51,7 @@ def on_message(client, userdata,msg):
         count += 1
     elif(count == 1):
         count += 1
-        id = str(txt).zfill(4)
+        id = txt
     elif(count == 2):
         count += 1
         date_time, humid, temp = txt.split(',')
