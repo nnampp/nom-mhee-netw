@@ -2,11 +2,6 @@ import paho.mqtt.client as mqtt
 import mysql.connector
 from datetime import datetime
 import sys
-import socket
-
-# hostname = socket.gethostname()
-# IPAddr = socket.gethostbyname(hostname)
-# print("IP address: "+IPAddr)
 
 # ----------------------------------------------------------------------------------------------------------------
 # command line syntax:
@@ -81,5 +76,5 @@ def on_message(client, userdata,msg):
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
-client.connect("mqtt.eclipseprojects.io", 1883, 60)
+client.connect("localhost", 8883, 60)
 client.loop_forever()

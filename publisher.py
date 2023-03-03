@@ -1,6 +1,5 @@
 import paho.mqtt.client as mqtt
 import pandas as pd
-import numpy as np
 import sys
 import time
 
@@ -23,9 +22,9 @@ else:
     print("Publisher number is not available (available just 1 and 2). Please try again.")
     sys.exit()
 
-client = mqtt.Client(pub)
+client = mqtt.Client("Publisher "+pub)
+client.connect("localhost", 8883, 60)
 
-client.connect("mqtt.eclipseprojects.io", 1883, 60)
 for x in data.values:
     print(sys.getsizeof(str(x[0])+","+str(x[1])+","+str(x[2])))
     print(sys.getsizeof(str(x[3][0:163])))
