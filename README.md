@@ -8,7 +8,7 @@ Project I
 # Description
   This is a group project about MQTT-based IoT application that sends sensor reading from an IoT node to a remote database. The system consists of 3 entities - Client (IoT node, Publisher), Broker and Server (Subscriber). Using Python, online broker from MQTT and SQL database to complete this project.
   
-✅Completed GOALS
+# ✅Completed GOALS
 1. Client only send at most 250 bytes in 1 message.
 2. Multiple IoT nodes can be deployed in the system.
 3. Broker prints IP address when there is a new connection.
