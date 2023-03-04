@@ -12,6 +12,10 @@ topic = ''
 topic1 = ''
 topic2 = ''
 
+# This architecture have 1 available subscriber
+# Subscriber can subscribe topic up to 2 topic
+# User can input 1 or 2 topic to subscribe
+# If user do not input any topic or subscriber more than 2 topic, this program will terminate itself
 if(len(sys.argv) == 3): 
     topic = [(sys.argv[1],0),(sys.argv[2],0)]
 elif(len(sys.argv) == 2):
@@ -20,6 +24,7 @@ else:
     print("Please enter topic 1-2 topics.")
     sys.exit()
 
+# Connect to MySQL database from localhost
 mydb = mysql.connector.connect(
         host="localhost",
         user="root",
@@ -34,16 +39,21 @@ temp = 0
 therm = ''
 sql = '' 
 
+# Function to subscribe topic after connect to mqtt broker
 def on_connect(self, client, userdata, rc):
     print("MQTT Connected.")
     self.subscribe(topic)
 
+# Function to receive packets from publisher
 def on_message(client, userdata,msg):     
     global count, date_time, humid, temp, therm, sql, id
 
+    # Print out current time that subscriber receive packets
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")   
 
+    # Because the publisher send multiple packet per data row,
+    # subscriber have to gather data from each packet to insert a row to database
     txt = msg.payload.decode("utf-8") 
     if(txt == "start"):
         count += 1
@@ -56,7 +66,7 @@ def on_message(client, userdata,msg):
     elif(count == 3 or count == 4):
         count += 1
         therm += txt
-    elif(txt == "end"):
+    elif(txt == "end"): 
         sql = "INSERT INTO `sensor_read`(`NodeID`,`Time`, `Humidity`, `Temperature`, `ThermalArray`) VALUES ('"+id+"','"+date_time+"',"+humid+","+temp+",'"+therm+"')"
         print(id)
         print(current_time)
@@ -72,9 +82,10 @@ def on_message(client, userdata,msg):
         mycursor.execute(sql)
         mydb.commit()
 
-
-client = mqtt.Client()
+# Create client from mqtt which name is "Subscriber"
+client = mqtt.Client("Subscriber")
 client.on_connect = on_connect
 client.on_message = on_message
+# Connect this client to mqtt broker, that already install in the computer we run code
 client.connect("localhost", 8883, 60)
 client.loop_forever()

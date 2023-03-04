@@ -1,10 +1,10 @@
 #!/bin/bash
-cd /path/
+cd C:\xampp\mysql
 
 mysql -u root -p
 
 
-use database_name
+use mqtt_subscriber_db
 
-sql='SELECT * FROM database_name'
+sql='SELECT * FROM mqtt_subscriber_db'
 echo ${sql}
