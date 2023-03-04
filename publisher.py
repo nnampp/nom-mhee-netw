@@ -46,4 +46,4 @@ for x in data.values:
     client.publish(topic,str(x[3][165:])) # Thermal Array part 2
     client.publish(topic,"end")
     # Finish publish value in one row
-    time.sleep(15)
+    time.sleep(180)
