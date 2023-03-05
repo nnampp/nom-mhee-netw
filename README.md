@@ -38,8 +38,8 @@ python publisher.py [publisher no.]
 python subscriber.py [topic1] [topic2]
 ```
 Note:   
-  1. The command for compiling python file is depends on user machine (ex. somes have to use 'python3')\
-  2. The publisher must be placed in the same folder with sample input files\
+  1. The command for compiling python file is depends on user machine (ex. somes have to use 'python3')
+  2. The publisher must be placed in the same folder with sample input files
   3. About publisher and subscriber connection,
       * Publisher will disconnect broker if no data flows over an open connection for 5 minutes or finish sending all data from the input file
       * Subscriber will disconnect broker if no data flows over an open connection for 5 minutes 
