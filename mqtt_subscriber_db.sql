@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 21, 2023 at 07:43 AM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Host: 127.0.0.1
+-- Generation Time: Mar 05, 2023 at 09:44 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mqtt_subscriber_1`
+-- Database: `mqtt_subscriber_db`
 --
 
 -- --------------------------------------------------------
@@ -28,10 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `sensor_read` (
+  `NodeID` varchar(4) NOT NULL,
   `Time` datetime(6) NOT NULL DEFAULT current_timestamp(6),
   `Humidity` double DEFAULT NULL,
   `Temperature` double DEFAULT NULL,
-  `ThermalArray` longtext COLLATE utf8_unicode_ci DEFAULT NULL
+  `ThermalArray` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 COMMIT;
 
