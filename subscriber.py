@@ -29,7 +29,7 @@ mydb = mysql.connector.connect(
         host="localhost",
         user="root",
         password="",
-        database="mqtt_subscriber_1")
+        database="mqtt_subscriber_db")
 
 count = 0
 id = ''
@@ -55,6 +55,7 @@ def on_message(client, userdata,msg):
     # Because the publisher send multiple packet per data row,
     # subscriber have to gather data from each packet to insert a row to database
     txt = msg.payload.decode("utf-8") 
+   
     if(txt == "start"):
         count += 1
     elif(count == 1):
@@ -87,5 +88,5 @@ client = mqtt.Client("Subscriber")
 client.on_connect = on_connect
 client.on_message = on_message
 # Connect this client to mqtt broker, that already install in the computer we run code
-client.connect("localhost", 8883, 60)
+client.connect("localhost", 8883, 300)
 client.loop_forever()

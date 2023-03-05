@@ -27,7 +27,7 @@ else:
 # Create client from mqtt which name is "Publisher" and its number
 client = mqtt.Client("Publisher "+pub)
 # Connect this client to mqtt broker, that already install in the computer we run code
-client.connect("localhost", 8883, 60)
+client.connect("localhost", 8883, 300)
 
 # Loop for publish each row
 for x in data.values:
