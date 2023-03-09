@@ -37,6 +37,13 @@ python publisher.py [publisher no.]
 ```
 python subscriber.py [topic1] [topic2]
 ```
+4. Check if data is already inserted to the database
+```
+cd C:\xampp\mysql
+mysql -u root -p
+use mqtt_subscriber_db
+SELECT * FROM sensor_read;
+``` 
 Note:   
   1. The command for compiling python file is depends on user machine (ex. somes have to use 'python3')
   2. The publisher must be placed in the same folder with sample input files
